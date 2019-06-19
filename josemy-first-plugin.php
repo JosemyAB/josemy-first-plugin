@@ -19,11 +19,14 @@
 class JosemyFirstPlugin {
 
     function __construct() {
-        
+        add_action('init', array($this, 'custom_post_type'));   
     }
 
     function activate() {
-        //Work on database
+        //Generated a CPT
+        $this->custom_post_type();
+        //flush rewrite rules
+        flush_rewrite_rules();
     }
 
     function deactivate() {
@@ -32,6 +35,11 @@ class JosemyFirstPlugin {
 
     function uninstall() {
         //Work on database
+    }
+
+    //Register new POST TYPE.
+    function custom_post_type() {
+        register_post_type('book', ['public' => true, 'label' => 'Books']);
     }
 }
 
@@ -46,3 +54,4 @@ register_activation_hook(__FILE__, array($josemyFristPlugin, 'activate'));
 register_deactivation_hook(__FILE__, array($josemyFristPlugin, 'deactivate'));
 
 //uninstall
+register_uninstall_hook(__FILE__, array($josemyFristPlugin, 'uninstall'));
