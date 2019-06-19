@@ -1,6 +1,6 @@
 <?php
 /**
- * @package JosemyFirstPluggin
+ * @package JosemyFirstPlugin
  */
 
 /*
@@ -19,7 +19,21 @@
 class JosemyFirstPlugin {
 
     function __construct() {
-        add_action('init', array($this, 'custom_post_type'));   
+        add_action('init', array($this, 'custom_post_type'));
+    }
+
+    /**
+     * Register scripts (css and js) only for admin part.
+     */
+    function register_admin_scripts() {
+        add_action('admin_enqueue_scripts', array($this, 'enqueue'));
+    }
+
+    /**
+     * Register scripts (css and js).
+     */
+    function register_scripts() {
+        add_action('wp_enqueue_scripts', array($this, 'enqueue'));
     }
 
     function activate() {
@@ -33,8 +47,10 @@ class JosemyFirstPlugin {
         //Work on database
     }
 
-    function uninstall() {
+    function enqueue() {
         //Work on database
+        wp_enqueue_style('myPluginstyle', plugins_url('/assets/mystyles.css', __FILE__));
+        wp_enqueue_script('myPluginscript', plugins_url('/assets/myscript.js', __FILE__));
     }
 
     //Register new POST TYPE.
@@ -45,6 +61,7 @@ class JosemyFirstPlugin {
 
 if (class_exists('JosemyFirstPlugin')) {
     $josemyFristPlugin = new JosemyFirstPlugin();
+    $josemyFristPlugin->register_admin_scripts();
 }
 
 //activation

@@ -3,7 +3,7 @@
 /**
  * Trigger this file on Plugin uninstall
  * 
- * @package JosemyFirstPluggin
+ * @package JosemyFirstPlugin
  */
 
  if (! defined('WP_UNINSTALL_PLUGIN')) {
@@ -18,7 +18,7 @@
  }
 
  //Access to database using global variable
- //lobal $wpdb;
+ //global $wpdb;
 
  //$wpdb->query( "DELETE FROM WP_POSTS WHERE POST_TYPE = 'book'" );
  //$wpdb->query( "DELETE FROM wp_postmeta WHERE post_id NOT IN (SELECT id FROM wp_posts)" );
