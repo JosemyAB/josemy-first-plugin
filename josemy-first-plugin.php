@@ -14,14 +14,35 @@
  Text Domain: josemy-first
  */
 
-if (! define ('ABSPATH')) {
-     die;
- }
+ defined('ABSPATH') or die('You cant access to this file.');
 
- defined('ABSPATH') or die('You cant access to this file.')
+class JosemyFirstPlugin {
 
- if (! function_exists ('add_action')) {
-     echo 'You cant access to this file.';
-     exit;
- }
- 
+    function __construct() {
+        
+    }
+
+    function activate() {
+        //Work on database
+    }
+
+    function deactivate() {
+        //Work on database
+    }
+
+    function uninstall() {
+        //Work on database
+    }
+}
+
+if (class_exists('JosemyFirstPlugin')) {
+    $josemyFristPlugin = new JosemyFirstPlugin();
+}
+
+//activation
+register_activation_hook(__FILE__, array($josemyFristPlugin, 'activate'));
+
+//deactivation
+register_deactivation_hook(__FILE__, array($josemyFristPlugin, 'deactivate'));
+
+//uninstall
